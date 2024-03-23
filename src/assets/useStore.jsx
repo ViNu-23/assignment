@@ -10,7 +10,7 @@ const useStore = create((set) => ({
   },
   logout: () => {
     set({ user: null, isLoggedIn: false });
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
   },
   hideToast: () => set({ showToast: false }), 
 }));
