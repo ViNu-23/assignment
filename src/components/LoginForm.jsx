@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Input, Button, Text, Heading, useToast } from '@chakra-ui/react';
+import { Box, Input, Button, Text, Heading, useToast, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../assets/useStore';
 
@@ -47,7 +47,8 @@ const LoginForm = () => {
   };
 
   return (
-    <Box maxW="md" mx="auto" m={6} p={4} borderWidth="1px" borderRadius="lg">
+    <Flex align="center" justify="center" h="100vh">
+       <Box maxW="md" mx="auto" m={6} p={4} borderWidth="1px" borderRadius="lg">
       <Heading as="h2" size="lg" textAlign="center" mb={6}>Login</Heading>
       <form onSubmit={handleSubmit}>
         <Input
@@ -78,6 +79,8 @@ const LoginForm = () => {
         Don't have an account? <a href="/">Sign Up</a>
       </Text>
     </Box>
+    </Flex>
+   
   );
 };
 
