@@ -1,11 +1,17 @@
 import { useState } from 'react';
-import { Box, Input, Button, Text, Heading } from '@chakra-ui/react';
+import { Box, Input, Button, Text, Heading, useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import useStore from '../assets/useStore';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+  const setUser = useStore(state => state.setUser);
+  const navigate = useNavigate();
+  const toast = useToast(); // Initialize toast
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,7 +20,30 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
+
+    // Retrieve user data from localStorage
+    const storedUserData = JSON.parse(localStorage.getItem('user'));
+
+    // Check if user exists and credentials match
+    if (
+      storedUserData &&
+      storedUserData.email === formData.email &&
+      storedUserData.password === formData.password
+    ) {
+      // If user exists and credentials match, proceed with login
+      setUser(storedUserData); // Set user data from local storage
+      navigate('/Home');
+    } else {
+      // If user doesn't exist or credentials don't match, show error message
+      console.log('Invalid credentials. Please try again.');
+      toast({
+        title: 'Error',
+        description: 'Invalid credentials. Please try again.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -28,6 +57,7 @@ const LoginForm = () => {
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          autoComplete="userName"
           required
         />
         <Input
@@ -36,6 +66,7 @@ const LoginForm = () => {
           name="password"
           placeholder="Password"
           value={formData.password}
+          autoComplete="current-password"
           onChange={handleChange}
           required
         />
@@ -44,7 +75,7 @@ const LoginForm = () => {
         </Button>
       </form>
       <Text mt={2} textAlign="center">
-        Dont have an account? <a href="/">Sign Up</a>
+        Don't have an account? <a href="/">Sign Up</a>
       </Text>
     </Box>
   );
