@@ -7,7 +7,6 @@ import useStore from './assets/useStore';
 
 const App = () => {
   const isLoggedIn = useStore((state) => state.isLoggedIn);
-
   return (
     <ChakraProvider>
       <Router>
@@ -16,7 +15,6 @@ const App = () => {
           <Route exact path="/Signup" element={<SignUpForm />} />
           <Route exact path="/Login" element={<LoginForm />} />
           <Route path="/Home" element={isLoggedIn ? <Home /> : <Navigate to="/Login" />} />
-          {/* Add more routes as needed */}
         </Routes>
       </Router>
     </ChakraProvider>

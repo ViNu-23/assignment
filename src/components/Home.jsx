@@ -4,16 +4,14 @@ import useStore from '../assets/useStore';
 
 const Home = () => {
   const { user, logout, showToast, hideToast } = useStore();
-  const toast = useToast(); // Initialize toast
+  const toast = useToast(); 
 
-  // If user is not logged in, redirect to login page
   if (!user) {
     return <Navigate to="/Login" />;
   }
 
   const handleLogout = () => {
-    logout(); // Call the logout function
-    // Display logout toast
+    logout(); 
     toast({
       title: 'Logged Out',
       description: 'You have been logged out.',
@@ -23,7 +21,6 @@ const Home = () => {
     });
   };
 
-  // Display success toast upon successful login
   if (showToast && user) {
     toast({
       title: 'Success',
@@ -32,7 +29,6 @@ const Home = () => {
       duration: 3000,
       isClosable: true,
     });
-    // Hide the toast after displaying
     hideToast();
   }
 

@@ -21,20 +21,16 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Retrieve user data from localStorage
     const storedUserData = JSON.parse(localStorage.getItem('user'));
 
-    // Check if user exists and credentials match
     if (
       storedUserData &&
       storedUserData.email === formData.email &&
       storedUserData.password === formData.password
     ) {
-      // If user exists and credentials match, proceed with login
       setUser(storedUserData); // Set user data from local storage
       navigate('/Home');
     } else {
-      // If user doesn't exist or credentials don't match, show error message
       console.log('Invalid credentials. Please try again.');
       toast({
         title: 'Error',

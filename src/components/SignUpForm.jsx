@@ -22,15 +22,12 @@ const SignUpForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    // Check if user already exists with the same email
     const storedUserData = JSON.parse(localStorage.getItem('user'));
     if (storedUserData && storedUserData.email === formData.email) {
-      // If user with the same email exists, show a warning message
       alert('An account with this email already exists. Please use a different email.');
       return; // Exit the function
     }
   
-    // Proceed with user creation if email is unique
     setUser(formData);
     navigate('/Home'); // Use navigate to go to the home page
   };
@@ -50,7 +47,7 @@ const SignUpForm = () => {
           value={formData.username}
           onChange={handleChange}
           required
-          autoComplete="username" // Added autocomplete attribute
+          autoComplete="username" 
         />
         <Input
           mb={4}
@@ -60,7 +57,7 @@ const SignUpForm = () => {
           value={formData.email}
           onChange={handleChange}
           required
-          autoComplete="username" // Added autocomplete attribute
+          autoComplete="username" 
         />
         <Input
           mb={4}
@@ -70,7 +67,7 @@ const SignUpForm = () => {
           value={formData.password}
           onChange={handleChange}
           required
-          autoComplete="new-password" // Added autocomplete attribute
+          autoComplete="new-password" 
         />
         <Input
           mb={4}
@@ -80,7 +77,7 @@ const SignUpForm = () => {
           value={formData.confirmPassword}
           onChange={handleChange}
           required
-          autoComplete="new-password" // Added autocomplete attribute
+          autoComplete="new-password" 
         />
         {formData.password !== formData.confirmPassword && (
           <Text color="red.500" mb={4}>Passwords do not match</Text>
